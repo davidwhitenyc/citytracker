@@ -1,0 +1,93 @@
+ # Byte-compiled / optimized / DLL files
+  __pycache__/
+  *.py[cod]
+  *.so
+  *.dll
+  *.dylib
+
+  # Virtual environments
+  .venv/
+  venv/
+  env/
+  ENV/
+
+  # Distribution / packaging
+  build/
+  dist/
+  *.egg-info/
+  *.egg
+  .eggs/
+
+  # Jupyter Notebook checkpoints
+  .ipynb_checkpoints/
+  .marimo/
+
+  # Testing / coverage / tooling
+  .pytest_cache/
+  .ruff_cache/
+  .mypy_cache/
+  .tox/
+  .coverage
+  htmlcov/
+
+  # IDE settings
+  .vscode/
+  .idea/
+
+  # macOS specific files
+  .DS_Store
+
+  # Logs
+  *.log
+
+  # Credentials and secrets
+  .env
+  .env.*
+  !.env.example
+  *.key
+  *.pem
+  *.p12
+  *.pfx
+  *-credentials.json
+  credentials.json
+  *-key.json
+  *_key.json
+  service-account*.json
+  *service-account*.json
+  secrets.json
+  secrets.yaml
+  secrets.yml
+  .secrets/
+  auth.json
+  token.json
+  *.token
+  .aws/credentials
+  .gcp/
+  gcloud/
+
+  # Model artifacts
+  *.joblib
+  *.onnx
+  models/
+
+  # Ignore specific directories
+  # video/
+
+  # Ignore data files
+  # *.csv
+  # *.parquet
+  # *.pkl
+  # *.h5
+  # *.hdf5
+  # data/
+
+  # Ignore personal notes / specific files
+  # TUTORIAL_GitHub_PyPI_Automation.md
+
+  # Exceptions: Ignore all .txt files except important.txt
+  # *.txt
+  # !important.txt
+
+  # Exceptions: Ignore everything in the config directory except config/production.yaml
+  # config/*
+  # !config/production.yaml
