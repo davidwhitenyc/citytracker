@@ -8,13 +8,20 @@ app = marimo.App(width="full")
 def _(mo):
     mo.md(r"""
     # citytracker.nyc
-
-    Developed by: David White david.white@changemakerdata.nyc
     """)
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    > Developed by: David White david.white@changemakerdata.nyc<br>
+    > Full Details on GitHub: https://github.com/davidwhitenyc/citytracker
+    """)
+    return
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.vstack([
         mo.image(
@@ -24,7 +31,7 @@ def _(mo):
             rounded=True,
             alt="NYC Flag",
         ),
-        mo.md("*Flag of New York City*"),
+        mo.md("*Flag of the City of New York*"),
     ], align="start")
     return
 
@@ -37,7 +44,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     # 0.1 Import libraries for API access, data wrangling, and data visualization
     import marimo as mo
@@ -77,8 +84,8 @@ def _(mo):
 
         /* Headings with dark background */
         .prose h1, .prose h2 {
-            background-color: #1a1a2e;
-            color: #e8e6f0;
+            background-color: #034C8C;
+            color: #f2f2f2;
             padding: 0.6em 0.8em;
             border-radius: 4px;
             margin-top: 1.5em;
@@ -90,7 +97,7 @@ def _(mo):
             margin-top: 1.5em;
         }
 
-        .prose h1 { font-size: 3.75rem; font-weight: 700; }
+        .prose h1 { font-size: 7.5rem; font-weight: 700; }
         .prose h2 { font-size: 1.875rem; font-weight: 600; }
         .prose h3 { font-size: 1.375rem; font-weight: 500; }
         .prose h4 { font-size: 1.125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -100,17 +107,25 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(mo):
     mo.md(r"""
+    > ***Style Reference***
     # Heading 1
+    ## Heading 2
+    ### Heading 3
+    #### Heading 4
+    *Body Text (italicized)*<br><br>
+    **Body Text (with emphasis)**<br><br>
+    ***Body Text (emphasis and italics)***<br><br>
+    Body Text (regular)
     """)
     return
 
 
 @app.cell
 def _():
-    # 0.3 Set notebook-wide thems for data graphics display
+    # 0.3 Set notebook-wide themes for data graphics display
     return
 
 
