@@ -1,0 +1,162 @@
+import marimo
+
+__generated_with = "0.19.9"
+app = marimo.App(width="full")
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    # v0.1 City Governance Dashboard feat. NYC Open Data
+
+    Developed by: David White david.white@changemakerdata.nyc
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    >**[NYC Open Data](https://opendata.cityofnewyork.us/)** is a free public website where New York City government agencies share information with residents in a format anyone can access and use. The site contains thousands of datasets on topics like business, education, environment, and city services that people can search, download, and analyze. Whether you're a complete beginner curious about how your city works or an experienced researcher looking for specific statistics, the platform offers training classes, how-to guides, and tools to help you find and understand the data you need. It's designed to make government information transparent and useful for everyday New Yorkers, journalists, researchers, and anyone interested in exploring data about the city.
+    """)
+    return
+
+
+@app.cell
+def _():
+    # 0. Import libraries for API access, data wrangling, and data visualization
+    import marimo as mo
+    import os
+    from dotenv import load_dotenv
+    from sodapy import Socrata
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt 
+    import seaborn as sns
+    import plotly.express as px
+    import plotly.graph_objects as go
+    from great_tables import GT, loc, style, md
+
+    return Socrata, load_dotenv, mo, os, pd, sns
+
+
+@app.cell
+def _(Socrata, load_dotenv, os, pd):
+    ## 1. Load data from NYC Open Data via the Socrata API
+
+    # 1.1 Load the Socrata App Token
+    load_dotenv()
+
+    token = os.getenv("SOCRATA_APP_TOKEN")
+
+    client = Socrata("data.cityofnewyork.us", token)
+
+
+    # 1.2 # Set the endpoint for the data pull
+    socrata_url = 'data.cityofnewyork.us'
+
+    endpoint = 'hg8x-zxpr' # This number is unique to each NYC dataset, see README for more information
+
+
+    # 1.3 Select the data to pull using SQL-style language and create an object to contain the data
+    query = """
+        SELECT *
+        LIMIT 100000
+    """
+
+    client = Socrata(
+        socrata_url,
+        app_token=None,
+        timeout=1000
+    )
+
+    results = client.get(endpoint, query=query)
+
+    # 1.4 Put the results into a DataFrame
+    housing = pd.DataFrame.from_records(results)
+
+    # 1.5 Display DataFrame info
+    print(housing.info(verbose=True))
+
+    # 1.6 Glimpse
+    housing.sample(5)
+    return (housing,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Affordable Housing Production by Building
+    > The Department of Housing Preservation and Development (HPD) reports on projects, buildings, and units that began after January 1, 2014, and are counted towards either the Housing New York plan (1/1/2014 – 12/31/2021) or the Housing Our Neighbors: A Blueprint for Housing & Homelessness plan (1/1/2022 – present).<br>
+    > [Data Source](https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Building/hg8x-zxpr/about_data)<br>
+    > [Data Dictionary](https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx)
+    """)
+    return
+
+
+@app.cell
+def _(housing, pd):
+    # 2. Set the appropriate data types for numeric and date columns
+
+    housing['extemely_low_income_units'] = housing['extremely_low_income_units'].astype('float')
+    housing['very_low_income_units'] = housing['very_low_income_units'].astype('float')
+    housing['low_income_units'] = housing['low_income_units'].astype('float')
+    housing['moderate_income_units'] = housing['moderate_income_units'].astype('float')
+    housing['middle_income_units'] = housing['middle_income_units'].astype('float')
+    housing['other_income_units'] = housing['other_income_units'].astype('float')
+
+    housing['project_start_date'] = pd.to_datetime(housing['project_start_date'])
+    housing['project_completion_date'] = pd.to_datetime(housing['project_completion_date'])
+
+    # Create year columns for easier grouping
+    housing['start_year'] = housing['project_start_date'].dt.year
+    housing['completion_year'] = housing['project_completion_date'].dt.year
+    return
+
+
+@app.cell
+def _(housing):
+
+    # 3. Create a DataFrame grouped by year
+    units_by_year = (
+        housing.groupby(['start_year', 'borough'])[ ['extemely_low_income_units', 
+                                                     'very_low_income_units', 
+                                                     'low_income_units', 
+                                                     'moderate_income_units', 
+                                                     'middle_income_units', 
+                                                     'other_income_units'] ].sum().reset_index()        
+    )
+    return (units_by_year,)
+
+
+@app.cell
+def _(sns, units_by_year):
+    # TODO: Change 'year' and 'unit_type' to widgets
+
+    # Filter for a specific year, then plot
+    sns.set_theme(style="whitegrid", palette="pastel")
+    year_data = units_by_year[units_by_year['start_year'] == 2024]
+    unit_type = 'extemely_low_income_units'
+    sns.barplot(year_data, x='borough', y=unit_type, estimator='sum', errorbar=None)
+    return
+
+
+@app.cell
+def _(housing):
+    housing['moderate_income_units'].sum()
+    return
+
+
+@app.cell
+def _(housing):
+    housing.describe()
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+if __name__ == "__main__":
+    app.run()

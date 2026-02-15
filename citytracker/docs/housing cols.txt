@@ -1,0 +1,51 @@
+WARNING:root:Requests made without an app_token will be subject to strict throttling limits.
+
+<class 'pandas.DataFrame'>
+RangeIndex: 8604 entries, 0 to 8603
+Data columns (total 41 columns):
+ #   Column                         Non-Null Count  Dtype
+---  ------                         --------------  -----
+ 0   project_id                     8604 non-null   str
+ 1   project_name                   8604 non-null   str
+ 2   project_start_date             8604 non-null   str
+ 3   building_id                    6889 non-null   str
+ 4   house_number                   8604 non-null   str
+ 5   street_name                    8604 non-null   str
+ 6   borough                        8604 non-null   str
+ 7   postcode                       6886 non-null   str
+ 8   bbl                            6809 non-null   str
+ 9   bin                            6809 non-null   str
+ 10  community_board                8604 non-null   str
+ 11  council_district               8603 non-null   str
+ 12  census_tract                   6886 non-null   str
+ 13  neighborhood_tabulation_area   6886 non-null   str
+ 14  latitude                       6886 non-null   str
+ 15  longitude                      6886 non-null   str
+ 16  latitude_internal              6790 non-null   str
+ 17  longitude_internal             6790 non-null   str
+ 18  reporting_construction_type    8604 non-null   str
+ 19  extended_affordability_status  8604 non-null   str
+ 20  prevailing_wage_status         8604 non-null   str
+ 21  extremely_low_income_units     1847 non-null   str
+ 22  very_low_income_units          3048 non-null   str
+ 23  low_income_units               4936 non-null   str
+ 24  _2_br_units                    5433 non-null   str
+ 25  _3_br_units                    3151 non-null   str
+ 26  _4_br_units                    532 non-null    str
+ 27  counted_rental_units           6242 non-null   str
+ 28  all_counted_units              8576 non-null   str
+ 29  total_units                    8604 non-null   str
+ 30  other_income_units             1218 non-null   str
+ 31  _1_br_units                    5483 non-null   str
+ 32  studio_units                   2838 non-null   str
+ 33  moderate_income_units          1467 non-null   str
+ 34  middle_income_units            2461 non-null   str
+ 35  _5_br_units                    63 non-null     str
+ 36  project_completion_date        6739 non-null   str
+ 37  building_completion_date       6890 non-null   str
+ 38  unknown_br_units               633 non-null    str
+ 39  counted_homeownership_units    2473 non-null   str
+ 40  _6_br_units                    24 non-null     str
+dtypes: str(41)
+memory usage: 4.5 MB
+None

@@ -1,0 +1,25 @@
+[project]
+name = "hoppy-4-dashboards"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "great-tables>=0.20.0",
+    "jupyter>=1.1.1",
+    "marimo>=0.19.8",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.0",
+    "pingouin>=0.5.5",
+    "plotly>=6.5.2",
+    "pyarrow>=23.0.0",
+    "python-dotenv>=1.0.0",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.0",
+    "seaborn>=0.13.2",
+    "sodapy>=2.2.0",
+    "statsmodels>=0.14.6",
+    "xlrd>=2.0.2",
+]
