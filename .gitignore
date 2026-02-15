@@ -1,4 +1,4 @@
-ni # Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *.so
@@ -83,6 +83,7 @@ models/
 
 # Ignore personal notes / specific files
 *TUTORIAL*.md
+*REFERENCE*.md
 docs/Marimo Slider UI.png
 
 # Exceptions: Ignore all .txt files except important.txt
