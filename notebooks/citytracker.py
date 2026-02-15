@@ -330,23 +330,11 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Let's use the <code style="color:#E8692B">Affordable Housing Production by Building</code> NYC Open Data dataset to illustrate the current challenges regarding affordable housing, and track progress, if any, over time.
+    """)
     return
 
 
@@ -368,14 +356,9 @@ def _(sns, units_by_year):
 
 
 @app.cell
-def _(housing):
-    housing['moderate_income_units'].sum()
-    return
-
-
-@app.cell
-def _(housing):
-    housing.describe()
+def _():
+    # TODO
+    # Add explanatory text to accompany this graphic
     return
 
 
