@@ -188,6 +188,17 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Dataset 01: Affordable Housing Production by Building
+    > The Department of Housing Preservation and Development (HPD) reports on projects, buildings, and units that began after January 1, 2014, and are counted towards either the Housing New York plan (1/1/2014 – 12/31/2021) or the Housing Our Neighbors: A Blueprint for Housing & Homelessness plan (1/1/2022 – present).<br>
+    > [Data Source](https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Building/hg8x-zxpr/about_data)<br>
+    > [Data Dictionary](https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx)
+    """)
+    return
+
+
 @app.cell
 def _(Socrata, load_dotenv, os, pd):
     ## 1. Load data from NYC Open Data via the Socrata API
@@ -223,31 +234,12 @@ def _(Socrata, load_dotenv, os, pd):
     # 1.4 Put the results into a DataFrame
     housing = pd.DataFrame.from_records(results)
 
-    # 1.5 Display DataFrame info
-    print(housing.info(verbose=True))
+    # # 1.5 Display DataFrame info
+    # print(housing.info(verbose=True))
 
-    # 1.6 Glimpse
-    housing.sample(5)
+    # # 1.6 Glimpse
+    # housing.sample(5)
     return (housing,)
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    ---
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    ## Affordable Housing Production by Building
-    > The Department of Housing Preservation and Development (HPD) reports on projects, buildings, and units that began after January 1, 2014, and are counted towards either the Housing New York plan (1/1/2014 – 12/31/2021) or the Housing Our Neighbors: A Blueprint for Housing & Homelessness plan (1/1/2022 – present).<br>
-    > [Data Source](https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Building/hg8x-zxpr/about_data)<br>
-    > [Data Dictionary](https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx)
-    """)
-    return
 
 
 @app.cell
@@ -283,6 +275,71 @@ def _(housing):
                                                      'other_income_units'] ].sum().reset_index()        
     )
     return (units_by_year,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Dataset 02: TKTK
+    > TKTK.<br>
+    > [Data Source]()<br>
+    > [Data Dictionary]()
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Dataset 03: TKTK
+    > TKTK.<br>
+    > [Data Source]()<br>
+    > [Data Dictionary]()
+    """)
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ---
+    """)
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell
