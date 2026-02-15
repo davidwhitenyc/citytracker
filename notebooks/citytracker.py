@@ -316,7 +316,16 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(mo):
+    mo.vstack([
+        mo.image(
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Flag_of_New_York_City.svg",
+            width="100%",
+            rounded=True,
+            alt="NYC Flag",
+        ),
+        mo.md("*Flag of the City of New York*"),
+    ], align="start")
     return
 
 
