@@ -124,9 +124,13 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(sns):
     # TODO
     # 0.3 Set notebook-wide themes for data graphics display
+
+    nyc_palette = ["#E8692B", "#2A5A8C", "#5A89B3", "#B0B0B0", "#3A3A3A"]
+    sns.set_theme(style="whitegrid")
+    sns.set_palette(nyc_palette)
     return
 
 
@@ -317,15 +321,12 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.vstack([
-        mo.image(
+    mo.image(
             src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Zohran-Website-Quote-Housing.png",
             width="100%",
             rounded=True,
-            alt="NYC Flag",
-        ),
-        mo.md("*Flag of the City of New York*"),
-    ], align="start")
+            alt="Quote from https://www.zohranfornyc.com/platform",
+        )
     return
 
 
@@ -359,7 +360,7 @@ def _(sns, units_by_year):
     # TODO: Change 'year' and 'unit_type' to widgets
 
     # Filter for a specific year, then plot
-    sns.set_theme(style="whitegrid", palette="pastel")
+
     year_data = units_by_year[units_by_year['start_year'] == 2024]
     unit_type = 'extemely_low_income_units'
     sns.barplot(year_data, x='borough', y=unit_type, estimator='sum', errorbar=None)
@@ -378,8 +379,48 @@ def _(housing):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Issue #2: TKTK
+    """)
+    return
+
+
 @app.cell
 def _():
+    # TODO 
+
+    # Add pull quote for issue #2
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Issue #3: TKTK
+    """)
+    return
+
+
+@app.cell
+def _():
+    # TODO 
+
+    # Add pull quote for issue #3
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ---
+    """)
     return
 
 
