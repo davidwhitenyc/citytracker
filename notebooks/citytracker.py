@@ -315,12 +315,12 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.vstack([
         mo.image(
-            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Zohran-Website-Quote-Housing.svg",
-            width="90%",
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Zohran-Website-Quote-Housing.png",
+            width="100%",
             rounded=True,
             alt="NYC Flag",
         ),
