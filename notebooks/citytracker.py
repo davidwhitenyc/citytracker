@@ -250,7 +250,7 @@ def _(Socrata, load_dotenv, os, pd):
 def _(housing, pd):
     # 2. Set the appropriate data types for numeric and date columns
 
-    housing['extemely_low_income_units'] = housing['extremely_low_income_units'].astype('float')
+    housing['extremely_low_income_units'] = housing['extremely_low_income_units'].astype('float')
     housing['very_low_income_units'] = housing['very_low_income_units'].astype('float')
     housing['low_income_units'] = housing['low_income_units'].astype('float')
     housing['moderate_income_units'] = housing['moderate_income_units'].astype('float')
@@ -268,7 +268,6 @@ def _(housing, pd):
 
 @app.cell
 def _(housing):
-
     # 3. Create a DataFrame grouped by year
     units_by_year = (
         housing.groupby(['start_year', 'borough'])[ ['extemely_low_income_units', 
@@ -339,18 +338,38 @@ def _(mo):
 
 
 @app.cell
-def _():
-    return
+def _(mo):
+    year_dropdown = mo.ui.dropdown(
+        options=["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"], 
+        value="2014", 
+        label="select year:")
+    year_dropdown
+    return (year_dropdown,)
 
 
 @app.cell
-def _(sns, units_by_year):
-    # TODO: Change 'year' and 'unit_type' to widgets
+def _(mo):
+    housing_type_dropdown = mo.ui.dropdown(
+        options=[
+        'extremely_low_income_units',
+        'very_low_income_units',
+        'low_income_units',
+        'moderate_income_units',
+        'middle_income_units',
+        'other_income_units',
+    ], 
+        value="low_income_units", 
+        label="select housing type:")
+    housing_type_dropdown
+    return (housing_type_dropdown,)
 
-    # Filter for a specific year, then plot
 
-    year_data = units_by_year[units_by_year['start_year'] == 2024]
-    unit_type = 'extemely_low_income_units'
+@app.cell
+def _(housing_type_dropdown, sns, units_by_year, year_dropdown):
+    # Select housing type, filter for a specific year, and then plot
+
+    year_data = units_by_year[units_by_year['start_year'] == int(year_dropdown.value)]
+    unit_type = housing_type_dropdown.value
     sns.barplot(year_data, x='borough', y=unit_type, estimator='sum', errorbar=None)
     return
 
