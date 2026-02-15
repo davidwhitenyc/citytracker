@@ -1,4 +1,4 @@
- # Byte-compiled / optimized / DLL files
+ni # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *.so
@@ -6,7 +6,7 @@ __pycache__/
 *.dylib
 
 # Virtual environments
-.venv/
+../.venv/
 venv/
 env/
 ENV/
@@ -42,7 +42,7 @@ htmlcov/
 
 # Credentials and secrets
 .env
-.env.*
+.env.example
 !.env.example
 *.key
 *.pem
