@@ -319,8 +319,8 @@ def _(mo):
 def _(mo):
     mo.vstack([
         mo.image(
-            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Flag_of_New_York_City.svg",
-            width="100%",
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Zohran-Website-Quote-Housing.svg",
+            width="90%",
             rounded=True,
             alt="NYC Flag",
         ),
