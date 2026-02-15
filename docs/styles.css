@@ -1,0 +1,43 @@
+/* This is a reference for CSS code that will be injected near the top of
+   of the Marimo notebook. Placing this code near the top of the notebook
+   has the effect of creating a notebook-wide theme.
+
+   The code below will be inserted into a Python cell. It uses the mo.Html() function
+   to inject CSS into the rendered output of the notebook's cells. */
+
+
+mo.Html("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    /* Override Marimo's font variables */
+    .marimo, :root {
+        --marimo-heading-font: 'Space Grotesk', 'SF Pro Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+        --marimo-text-font: 'Space Grotesk', 'SF Pro Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    }
+
+    /* Typography */
+    .prose {
+        line-height: 1.7;
+        color: #2c3e50;
+    }
+
+    /* Headings */
+    .prose h1, .prose h2 {
+        background-color: #1a1a2e;
+        color: #e8e6f0;
+        padding: 0.6em 0.8em;
+        border-radius: 4px;
+        margin-top: 1.5em;
+    }
+    .prose h3, .prose h4 {
+        color: #1a1a2e;
+        margin-top: 1.5em;
+    }
+
+    .prose h1 { font-weight: 700; }
+    .prose h2 { font-weight: 600; }
+    .prose h3 { font-weight: 500; }
+    .prose h4 { font-weight: 500; }
+</style>
+""")

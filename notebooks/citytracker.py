@@ -24,7 +24,7 @@ def _(mo):
 
 @app.cell
 def _():
-    # 0. Import libraries for API access, data wrangling, and data visualization
+    # 0.1 Import libraries for API access, data wrangling, and data visualization
     import marimo as mo
     import os
     from dotenv import load_dotenv
@@ -38,6 +38,53 @@ def _():
     from great_tables import GT, loc, style, md
 
     return Socrata, load_dotenv, mo, os, pd, sns
+
+
+@app.cell
+def _(mo):
+    # 0.2 Set notebook-wide themes for text display (via CSS injection)
+    mo.Html("""
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        /* Override Marimo's font variables */
+        .marimo, :root {
+            --marimo-heading-font: 'Space Grotesk', 'SF Pro Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            --marimo-text-font: 'Space Grotesk', 'SF Pro Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+        }
+
+        /* Typography */
+        .prose {
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+
+        /* Headings */
+        .prose h1, .prose h2 {
+            background-color: #1a1a2e;
+            color: #e8e6f0;
+            padding: 0.6em 0.8em;
+            border-radius: 4px;
+            margin-top: 1.5em;
+        }
+        .prose h3, .prose h4 {
+            color: #1a1a2e;
+            margin-top: 1.5em;
+        }
+
+        .prose h1 { font-weight: 700; }
+        .prose h2 { font-weight: 600; }
+        .prose h3 { font-weight: 500; }
+        .prose h4 { font-weight: 500; }
+    </style>
+    """)
+    return
+
+
+@app.cell
+def _():
+    # 0.3 Set notebook-wide thems for data graphics display
+    return
 
 
 @app.cell
