@@ -39,12 +39,28 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ## About this project
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     >**[NYC Open Data](https://opendata.cityofnewyork.us/)** is a free public website where New York City government agencies share information with residents in a format anyone can access and use. The site contains thousands of datasets on topics like business, education, environment, and city services that people can search, download, and analyze. Whether you're a complete beginner curious about how your city works or an experienced researcher looking for specific statistics, the platform offers training classes, how-to guides, and tools to help you find and understand the data you need. It's designed to make government information transparent and useful for everyday New Yorkers, journalists, researchers, and anyone interested in exploring data about the city.
     """)
     return
 
 
 @app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Setting up our workspace using Marimo Notebooks
+    """)
+    return
+
+
+@app.cell
 def _():
     # 0.1 Import libraries for API access, data wrangling, and data visualization
     import marimo as mo
@@ -108,9 +124,31 @@ def _(mo):
 
 
 @app.cell
+def _():
+    # TODO
+    # 0.3 Set notebook-wide themes for data graphics display
+    return
+
+
+@app.cell
+def _():
+    # TODO 
+    # 0.4 Set custom defaults for the display of Great Tables tables
+    return
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    > ***Style Reference***
+    ## Project styles reference
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Typography
     # Heading 1
     ## Heading 2
     ### Heading 3
@@ -123,15 +161,30 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # 0.3 Set notebook-wide themes for data graphics display
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Colors
+    """)
     return
 
 
 @app.cell
-def _():
-    # 0.4 Set custom defaults for the display of Great Tables tables
+def _(mo):
+    mo.image(
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/AdobeColor-color theme_Flag_of_New_York_City.jpeg",
+            height=900,
+            rounded=True,
+            alt="NYC Flag-Inspired Color Theme",
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Loading data into our project
+    """)
     return
 
 
@@ -176,6 +229,14 @@ def _(Socrata, load_dotenv, os, pd):
     # 1.6 Glimpse
     housing.sample(5)
     return (housing,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ---
+    """)
+    return
 
 
 @app.cell(hide_code=True)
