@@ -83,6 +83,7 @@ models/
 
 # Ignore personal notes / specific files
 # TUTORIAL_GitHub_PyPI_Automation.md
+docs/Marimo Slider UI.png
 
 # Exceptions: Ignore all .txt files except important.txt
 # *.txt
