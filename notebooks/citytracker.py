@@ -7,10 +7,25 @@ app = marimo.App(width="full")
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # v0.1 City Governance Dashboard feat. NYC Open Data
+    # citytracker.nyc
 
     Developed by: David White david.white@changemakerdata.nyc
     """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.vstack([
+        mo.image(
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/Flag_of_New_York_City.svg",
+            width=400,
+            height=300,
+            rounded=True,
+            alt="NYC Flag",
+        ),
+        mo.md("*Flag of New York City*"),
+    ], align="start")
     return
 
 
@@ -55,11 +70,12 @@ def _(mo):
 
         /* Typography */
         .prose {
+            font-size: 1.125rem;
             line-height: 1.7;
             color: #2c3e50;
         }
 
-        /* Headings */
+        /* Headings with dark background */
         .prose h1, .prose h2 {
             background-color: #1a1a2e;
             color: #e8e6f0;
@@ -67,16 +83,27 @@ def _(mo):
             border-radius: 4px;
             margin-top: 1.5em;
         }
+
+        /* Headings without background */
         .prose h3, .prose h4 {
             color: #1a1a2e;
             margin-top: 1.5em;
         }
 
-        .prose h1 { font-weight: 700; }
-        .prose h2 { font-weight: 600; }
-        .prose h3 { font-weight: 500; }
-        .prose h4 { font-weight: 500; }
+        .prose h1 { font-size: 3.75rem; font-weight: 700; }
+        .prose h2 { font-size: 1.875rem; font-weight: 600; }
+        .prose h3 { font-size: 1.375rem; font-weight: 500; }
+        .prose h4 { font-size: 1.125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+
     </style>
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    # Heading 1
     """)
     return
 
@@ -84,6 +111,12 @@ def _(mo):
 @app.cell
 def _():
     # 0.3 Set notebook-wide thems for data graphics display
+    return
+
+
+@app.cell
+def _():
+    # 0.4 Set custom defaults for the display of Great Tables tables
     return
 
 
