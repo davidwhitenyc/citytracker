@@ -270,7 +270,7 @@ def _(housing, pd):
 def _(housing):
     # 3. Create a DataFrame grouped by year
     units_by_year = (
-        housing.groupby(['start_year', 'borough'])[ ['extemely_low_income_units', 
+        housing.groupby(['start_year', 'borough'])[ ['extremely_low_income_units', 
                                                      'very_low_income_units', 
                                                      'low_income_units', 
                                                      'moderate_income_units', 
@@ -337,7 +337,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     year_dropdown = mo.ui.dropdown(
         options=["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"], 
@@ -347,7 +347,7 @@ def _(mo):
     return (year_dropdown,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     housing_type_dropdown = mo.ui.dropdown(
         options=[
@@ -364,7 +364,7 @@ def _(mo):
     return (housing_type_dropdown,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(housing_type_dropdown, sns, units_by_year, year_dropdown):
     # Select housing type, filter for a specific year, and then plot
 

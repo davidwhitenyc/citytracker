@@ -71,6 +71,7 @@ gcloud/
 models/
 
 # Ignore specific directories
+docs/tutorials-and-guides
 # video/
 
 # Ignore data files
@@ -84,6 +85,7 @@ models/
 # Ignore personal notes / specific files
 *TUTORIAL*.md
 *REFERENCE*.md
+*GUIDE*.md
 docs/Marimo Slider UI.png
 
 # Exceptions: Ignore all .txt files except important.txt
