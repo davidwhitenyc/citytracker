@@ -178,7 +178,8 @@ graph TD
   - Remove: `python-dotenv`
   - Remove: `sodapy`
   - Keep or remove: `great-tables` (if unused)
-- [ ] **IF seaborn incompatible:** Refactor visualizations to matplotlib
+> [!CAUTION]
+> **If seaborn is incompatible:** Refactor visualizations to matplotlib
 - [ ] Test notebook locally: `marimo run notebooks/citytracker.py`
 - [ ] Verify data loads correctly and visualizations work
 
@@ -332,11 +333,11 @@ When HPD publishes new housing data:
 ## Data Sources:
 
 ### Dataset 01: Affordable Housing Production by Building
-**Agency:** NYC Department of Housing Preservation and Development (HPD)
-**Endpoint:** hg8x-zxpr
-**URL:** https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Building/hg8x-zxpr/about_data
-**Data Dictionary:** https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx
-**Update Frequency:** [TODO: Verify with HPD]
+- **Agency:** NYC Department of Housing Preservation and Development (HPD)
+- **Endpoint:** hg8x-zxpr
+- **URL:** https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Building/hg8x-zxpr/about_data
+- **Data Dictionary:** https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx
+- **Update Frequency:** [TODO: Verify with HPD]
 
 ---
 
