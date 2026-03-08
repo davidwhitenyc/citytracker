@@ -1,12 +1,29 @@
-# citytracker Data Dashboard with Marimo
+# `citytracker`: Civic Data Dashboard, Powered by [Marimo](https://marimo.io/) & [Netlify](https://www.netlify.com/)
 
 [View Dashboard on molab](https://molab.marimo.io/notebooks/nb_yhv6b2amYTK5SRpp9axJnF)
 *Last Updated: 2/15/2026 13:21:43*
 
----
 
-## Current Status
-Currently deployed on Marimo's molab platform. In progress: migrating to self-hosted Netlify deployment using WASM export for improved workflow management, custom domain support, and preview deployments.
+> [!NOTE]
+> ***Why use this particular method to publish a data dashboard?***
+> The Marimo --> Netlify workflow provides the following strategic benefits:
+>
+> - **Unified dashboard** for all sites
+>
+> - **Preview deployments** for every branch (critical for client review)
+>
+> - **Git-based workflow** (push to deploy)
+>
+> - **Custom domain management** per project
+>
+> - **No server costs** or maintenance
+>
+> - **Scales automatically** to traffic
+>
+>These workflow advantages outweigh the package compatibility constraints for this use case.
+
+
+
 
 ---
 
@@ -15,11 +32,11 @@ Currently deployed on Marimo's molab platform. In progress: migrating to self-ho
 ```
 citytracker/
 ├── notebooks/
-│   ├── citytracker.py              # Main dashboard (uses API currently, will use static data)
+│   ├── citytracker.py              # Main dashboard [TODO] Switch data source from API to local storage 
 │   ├── fetch-housing-data.py       # [TODO] Data fetching notebook (run locally)
 │   └── test-wasm-packages.py       # [TODO] Package compatibility testing
 ├── data/
-│   ├── housing.csv                 # [TODO] Static housing data (or .parquet)
+│   ├── housing.parquet             # [TODO] Static housing data (or .csv)
 │   └── housing_metadata.json       # [TODO] Last updated timestamp and row count
 ├── docs/
 │   ├── images/
@@ -32,22 +49,33 @@ citytracker/
 └── README.md
 ```
 
----
 
-## Next Steps: Netlify WASM Deployment
 
-### ✅ Completed
+## Current Status
+
+Currently deployed on Marimo's molab platform. In progress: migrating to self-hosted Netlify deployment using WASM export for improved workflow management, custom domain support, and preview deployments.
+
+
+
+## ✅ Completed
+
 - [x] Repository structure created (notebooks/, data/, docs/)
 - [x] requirements.txt created with core packages
 - [x] .gitignore configured
-- [x] Main notebook functional with seaborn visualizations and interactive widgets
 - [x] Git repository initialized and commits made
+- [x] Style guide created and translated to css
+- [x] First relevant data source identified on https://opendata.cityofnewyork.us/ and data exported via API 
+- [x] Main notebook functional with seaborn visualizations and interactive widgets
 
----
 
-### Phase 0: WASM Compatibility Testing (CRITICAL - DO FIRST)
 
-**Priority:** Test whether current visualization approach will work in WASM deployment.
+## 🚧 Next Steps
+
+### ☐ 01. Perform WASM compatibility testing 
+
+> [!CAUTION]
+> ***Test whether current visualization approach will work in WASM deployment.***
+
 
 - [ ] Create `notebooks/test-wasm-packages.py` with test cells for:
   - seaborn (critical - used for all current visualizations)
@@ -62,20 +90,39 @@ citytracker/
   cd test-dist && python -m http.server 8000
   # Open http://localhost:8000 in browser, check console (F12) for errors
   ```
-- [ ] **DECISION POINT:** If seaborn unavailable, plan matplotlib refactor:
-  - Rewrite visualizations using matplotlib directly
-  - Apply custom styling to match seaborn aesthetics
-  - Update visualization code in main notebook
-- [ ] **DECISION POINT:** Choose data format based on PyArrow test:
-  - CSV if PyArrow unavailable (guaranteed compatibility)
-  - Parquet if PyArrow works (50-70% smaller files)
-  - Save both formats if undecided
+> [!IMPORTANT]
+> ***DECISION POINT: Package compatibility results will determine the path forward:***
+
+```mermaid
+graph TD
+    TestResults[Test Results from<br/>WASM Export] --> Seaborn{Seaborn<br/>Works?}
+
+    Seaborn -->|✅ Yes| KeepSeaborn[Keep seaborn in requirements.txt<br/>No code changes needed]
+    Seaborn -->|❌ No| RefactorMPL[Must refactor visualizations:<br/>- Replace seaborn with matplotlib<br/>- Apply custom styling<br/>- Update Step 2 checklist]
+
+    KeepSeaborn --> PyArrow{PyArrow<br/>Works?}
+    RefactorMPL --> PyArrow
+
+    PyArrow -->|✅ Yes| UseParquet[Use Parquet format:<br/>- Smaller files 50-70%<br/>- Faster loading<br/>- Types preserved]
+    PyArrow -->|❌ No| UseCSV[Use CSV format:<br/>- Guaranteed compatibility<br/>- Larger files<br/>- Need type conversions]
+
+    UseParquet --> UpdateReqs[Update requirements.txt<br/>and document decisions]
+    UseCSV --> UpdateReqs
+
+    style Seaborn fill:#5A89B3,color:#fff
+    style PyArrow fill:#5A89B3,color:#fff
+    style RefactorMPL fill:#E8692B,color:#fff
+    style UseParquet fill:#2A5A8C,color:#fff
+    style UseCSV fill:#2A5A8C,color:#fff
+    style KeepSeaborn fill:#2A5A8C,color:#fff
+```
+
 - [ ] Update requirements.txt based on test results
 - [ ] Document test results below in "WASM Compatibility Results" section
 
 ---
 
-### Phase 1: Data Architecture
+### ☐ 02. Update data architecture
 
 - [ ] Create `notebooks/fetch-housing-data.py` notebook
 - [ ] Implement data fetching from Socrata API:
@@ -109,7 +156,7 @@ citytracker/
 
 ---
 
-### Phase 2: Main Notebook Refactor
+### ☐ 03. Refactor main notebook
 
 - [ ] In `notebooks/citytracker.py`, replace API data loading (lines 207-246):
   - Remove: `from dotenv import load_dotenv`
@@ -137,7 +184,7 @@ citytracker/
 
 ---
 
-### Phase 3: Final WASM Testing
+### ☐ 04. Double-check WASM compatibility
 
 - [ ] Export main notebook to WASM:
   ```bash
@@ -160,14 +207,14 @@ citytracker/
 
 ---
 
-### Phase 4: Netlify Configuration
+### ☐ 05. Set up Netlify configuration
 
 - [ ] Create `netlify.toml` in project root:
   ```toml
   [build]
     command = "pip install marimo -r requirements.txt && marimo export html-wasm notebooks/citytracker.py -o dist --mode run"
     publish = "dist"
-
+  
   [build.environment]
     PYTHON_VERSION = "3.11"
   ```
@@ -175,7 +222,31 @@ citytracker/
   ```
   test-dist/
   ```
-- [ ] **DECISION POINT:** Data file version control strategy:
+> [!IMPORTANT]
+> ***DECISION POINT: Decide on a data version control strategy:***
+
+```mermaid
+graph TD
+    Start[Data files ready in<br/>data/ directory] --> Consider{What's your<br/>update cadence?}
+
+    Consider -->|Monthly/Weekly<br/>Manual updates| OptionA[Option A: Commit to Git<br/>recommended]
+    Consider -->|Frequent updates<br/>Large files >10MB| OptionB[Option B: Git LFS]
+    Consider -->|Want always-fresh<br/>data on deploy| OptionC[Option C: Build-time Fetch]
+
+    OptionA --> A1[✅ Simplest setup<br/>✅ Data in version control<br/>✅ No extra configuration]
+    OptionB --> B1[⚠️ Requires Git LFS setup<br/>✅ Better for large files<br/>✅ Keeps repo size small]
+    OptionC --> C1[⚠️ Most complex<br/>⚠️ Requires API token in Netlify<br/>✅ Always current data]
+
+    A1 --> Decide[Choose based on<br/>your needs]
+    B1 --> Decide
+    C1 --> Decide
+
+    style Consider fill:#5A89B3,color:#fff
+    style OptionA fill:#2A5A8C,color:#fff
+    style OptionB fill:#B0B0B0,color:#000
+    style OptionC fill:#B0B0B0,color:#000
+```
+
   - **Option A (recommended):** Commit data files to git
     - Simplest approach
     - Fine for monthly/weekly updates
@@ -196,7 +267,7 @@ citytracker/
 
 ---
 
-### Phase 5: GitHub and Netlify Deployment
+### ☐ 06. Deploy to Netlify (via GitHub)
 
 - [ ] Create new GitHub repository (if not exists): https://github.com/new
 - [ ] Push to GitHub:
@@ -227,7 +298,13 @@ citytracker/
 
 ---
 
-## Data Update Workflow
+
+
+
+
+## Future Planning: 
+
+### Data Update Workflow
 
 *(After deployment is complete)*
 
@@ -248,7 +325,11 @@ When HPD publishes new housing data:
 
 ---
 
-## Data Sources
+
+
+
+
+## Data Sources:
 
 ### Dataset 01: Affordable Housing Production by Building
 **Agency:** NYC Department of Housing Preservation and Development (HPD)
@@ -259,16 +340,23 @@ When HPD publishes new housing data:
 
 ---
 
-## Key Resources
 
-- **Publishing Guide:** `docs/tutorials-and-guides/Publishing Marimo to Netlify Guide.md`
+
+
+
+## Key Resources:
+
 - **Pyodide Package List:** https://pyodide.org/en/stable/usage/packages-in-pyodide.html
 - **Marimo WASM Export:** https://docs.marimo.io/guides/exporting.html
 - **Netlify Documentation:** https://docs.netlify.com
 
 ---
 
-## Development Notes
+
+
+
+
+## Development Notes:
 
 ### WASM Compatibility Testing Method
 
@@ -287,7 +375,7 @@ Do NOT assume "pure Python" or "dependencies available" means a package will wor
 
 ### WASM Compatibility Results
 
-*(Document test results here after Phase 0)*
+*(Document test results here after Step 0)*
 
 **Tested:** [Date]
 
@@ -304,22 +392,3 @@ Do NOT assume "pure Python" or "dependencies available" means a package will wor
 
 ---
 
-### Why Netlify WASM?
-
-Strategic benefits for managing multiple projects and client work:
-
-- **Unified dashboard** for all sites
-- **Preview deployments** for every branch (critical for client review)
-- **Git-based workflow** (push to deploy)
-- **Custom domain management** per project
-- **No server costs** or maintenance
-- **Scales automatically** to traffic
-
-These workflow advantages outweigh the package compatibility constraints for this use case.
-
----
-
-## Deployment Information
-
-**molab (current):** https://molab.marimo.io/notebooks/nb_yhv6b2amYTK5SRpp9axJnF
-**Netlify (planned):** [URL will be added after deployment]
