@@ -1,0 +1,9 @@
+marimo
+python-dotenv
+sodapy
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+great-tables
