@@ -176,7 +176,7 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.image(
-            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/AdobeColor-color theme_Flag_of_New_York_City.jpeg",
+            src="https://raw.githubusercontent.com/davidwhitenyc/citytracker/main/docs/images/AdobeColor-color theme_Flag_of_New_York_City.jpeg",
             height=900,
             rounded=True,
             alt="NYC Flag-Inspired Color Theme",
