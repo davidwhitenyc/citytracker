@@ -1,12 +1,14 @@
-# `citytracker`: Civic Data Dashboard, Powered by [Marimo](https://marimo.io/) & [Netlify](https://www.netlify.com/)
+# `citytracker`: Civic Data Dashboard, Powered by [Marimo](https://marimo.io/) → [Netlify](https://www.netlify.com/)
 
 [View Dashboard on molab](https://molab.marimo.io/notebooks/nb_yhv6b2amYTK5SRpp9axJnF)
 *Last Updated: 2/15/2026 13:21:43*
 
 
+
+
 > [!NOTE]
 > ***Why use this particular method to publish a data dashboard?***
-> The Marimo --> Netlify workflow provides the following strategic benefits:
+> The Marimo → Netlify workflow provides the following strategic benefits:
 >
 > - **Unified dashboard** for all sites
 >
@@ -24,15 +26,35 @@
 
 
 
+## 🟡 Current Status
 
----
+Currently deployed on Marimo's molab platform. In progress: migrating to self-hosted Netlify deployment using WASM export for improved workflow management, custom domain support, and preview deployments.
 
-## Repository Structure
+
+
+## 🔧 Prerequisites
+
+**Local Development:**
+- Python 3.11+
+- [uv](https://docs.astral.sh/uv/) for environment management
+- [marimo](https://marimo.io/) for notebooks
+
+**Deployment:**
+- [GitHub](https://github.com) account (free tier)
+- [Netlify](https://www.netlify.com) account (free tier)
+- Git installed and configured
+
+**Optional:**
+- NYC Open Data API token (for data fetching)
+
+
+
+## 🗃️ Repository Structure
 
 ```
 citytracker/
 ├── notebooks/
-│   ├── citytracker.py              # Main dashboard [TODO] Switch data source from API to local storage 
+│   ├── citytracker.py              # Main dashboard [TODO] Switch data source from API to local storage
 │   ├── fetch-housing-data.py       # [TODO] Data fetching notebook (run locally)
 │   └── test-wasm-packages.py       # [TODO] Package compatibility testing
 ├── data/
@@ -51,12 +73,6 @@ citytracker/
 
 
 
-## Current Status
-
-Currently deployed on Marimo's molab platform. In progress: migrating to self-hosted Netlify deployment using WASM export for improved workflow management, custom domain support, and preview deployments.
-
-
-
 ## ✅ Completed
 
 - [x] Repository structure created (notebooks/, data/, docs/)
@@ -71,7 +87,7 @@ Currently deployed on Marimo's molab platform. In progress: migrating to self-ho
 
 ## 🚧 Next Steps
 
-### ☐ 01. Perform WASM compatibility testing 
+### 01. Perform WASM compatibility testing 
 
 > [!CAUTION]
 > ***Test whether current visualization approach will work in WASM deployment.***
@@ -120,9 +136,9 @@ graph TD
 - [ ] Update requirements.txt based on test results
 - [ ] Document test results below in "WASM Compatibility Results" section
 
----
 
-### ☐ 02. Update data architecture
+
+### 02. Update data architecture
 
 - [ ] Create `notebooks/fetch-housing-data.py` notebook
 - [ ] Implement data fetching from Socrata API:
@@ -154,9 +170,9 @@ graph TD
   - From citytracker.py: `pd.read_csv('../data/housing.csv')`
   - Verify path works correctly
 
----
 
-### ☐ 03. Refactor main notebook
+
+### 03. Refactor main notebook
 
 - [ ] In `notebooks/citytracker.py`, replace API data loading (lines 207-246):
   - Remove: `from dotenv import load_dotenv`
@@ -183,9 +199,9 @@ graph TD
 - [ ] Test notebook locally: `marimo run notebooks/citytracker.py`
 - [ ] Verify data loads correctly and visualizations work
 
----
 
-### ☐ 04. Double-check WASM compatibility
+
+### 04. Double-check WASM compatibility
 
 - [ ] Export main notebook to WASM:
   ```bash
@@ -206,9 +222,9 @@ graph TD
 - [ ] Test on multiple browsers (Chrome, Firefox, Safari)
 - [ ] If any issues found, debug and retest
 
----
 
-### ☐ 05. Set up Netlify configuration
+
+### 05. Set up Netlify configuration
 
 - [ ] Create `netlify.toml` in project root:
   ```toml
@@ -248,7 +264,8 @@ graph TD
     style OptionC fill:#B0B0B0,color:#000
 ```
 
-  - **Option A (recommended):** Commit data files to git
+  - **Option A:** Commit data files to git
+    
     - Simplest approach
     - Fine for monthly/weekly updates
     - Data automatically included in deployments
@@ -266,50 +283,50 @@ graph TD
   git commit -m "Configure for Netlify WASM deployment"
   ```
 
----
 
-### ☐ 06. Deploy to Netlify (via GitHub)
+
+### 06. Deploy to Netlify (via GitHub)
 
 - [ ] Create new GitHub repository (if not exists): https://github.com/new
+
 - [ ] Push to GitHub:
   ```bash
   git remote add origin https://github.com/yourusername/citytracker.git
   git branch -M main
   git push -u origin main
   ```
+  
 - [ ] Log in to Netlify: https://app.netlify.com
+
 - [ ] Add new site → Import existing project → GitHub
+
 - [ ] Select citytracker repository
+
 - [ ] Verify build settings (should auto-detect from netlify.toml):
   - Build command: `pip install marimo -r requirements.txt && marimo export html-wasm notebooks/citytracker.py -o dist --mode run`
   - Publish directory: `dist`
   - Python version: 3.11
+  
 - [ ] Click "Deploy site"
+
 - [ ] Monitor build logs for errors
+
 - [ ] Once deployed, test live site:
   - [ ] Notebook loads (expect 5-15 seconds for Pyodide)
   - [ ] All interactive features work
   - [ ] Data displays correctly
   - [ ] Test on mobile device
+  
 - [ ] (Optional) Configure custom domain:
   - Site settings → Domain management → Add custom domain
   - Follow DNS configuration instructions
   - Wait for HTTPS certificate provisioning
+  
 - [ ] Document final deployment URL in this README
 
----
+  
 
-
-
-
-
-## Future Planning: 
-
-### Data Update Workflow
-
-*(After deployment is complete)*
-
-When HPD publishes new housing data:
+### 07. Update data (after deployment is complete) 
 
 1. Run `marimo edit notebooks/fetch-housing-data.py` locally
 2. Execute all cells to fetch fresh data from Socrata API
@@ -324,13 +341,9 @@ When HPD publishes new housing data:
 6. Netlify auto-deploys (2-3 minutes)
 7. Visit live site and verify data freshness indicator updated
 
----
 
 
-
-
-
-## Data Sources:
+## 💾 Data Sources
 
 ### Dataset 01: Affordable Housing Production by Building
 - **Agency:** NYC Department of Housing Preservation and Development (HPD)
@@ -339,57 +352,17 @@ When HPD publishes new housing data:
 - **Data Dictionary:** https://data.cityofnewyork.us/api/views/hg8x-zxpr/files/b960c601-e951-4103-9414-223adef41fce?download=true&filename=Affordable%20Housing%20Production%20by%20Building%20Data%20Dictionary.xlsx
 - **Update Frequency:** [TODO: Verify with HPD]
 
----
 
 
-
-
-
-## Key Resources:
+## 📚 Other Resources
 
 - **Pyodide Package List:** https://pyodide.org/en/stable/usage/packages-in-pyodide.html
 - **Marimo WASM Export:** https://docs.marimo.io/guides/exporting.html
 - **Netlify Documentation:** https://docs.netlify.com
 
+
+
 ---
 
 
-
-
-
-## Development Notes:
-
-### WASM Compatibility Testing Method
-
-**Most reliable approach:**
-
-1. Create minimal test notebook importing only the package being tested
-2. Export to WASM: `marimo export html-wasm test.py -o test-dist --mode run`
-3. Serve locally: `cd test-dist && python -m http.server 8000`
-4. Open http://localhost:8000 and check browser console (F12) for errors
-
-**Critical:** Only two sources are reliable for WASM compatibility:
-1. Official Pyodide package list
-2. Actual WASM export testing
-
-Do NOT assume "pure Python" or "dependencies available" means a package will work.
-
-### WASM Compatibility Results
-
-*(Document test results here after Step 0)*
-
-**Tested:** [Date]
-
-| Package | Status | Notes |
-|---------|--------|-------|
-| seaborn | [✅/❌] | [Result and any issues] |
-| pyarrow | [✅/❌] | [Result and any issues] |
-| great-tables | [✅/❌] | [Result and any issues] |
-
-**Final Package List for requirements.txt:**
-```
-[To be determined after testing]
-```
-
----
 
